@@ -1,6 +1,6 @@
 <template>
     <div class="result">
-        <span>{{ Number(result).toLocaleString() }}</span>
+        <span>{{ Intl.NumberFormat('en-EN', {maximumSignificantDigits: 9}).format(result) }}</span>
     </div>
 </template>
 
@@ -8,7 +8,7 @@
 import { defineProps } from 'vue'
 
 defineProps({
-  result: Number || String
+  result: [Number, String]
 })
 </script>
 
@@ -19,17 +19,19 @@ defineProps({
         color: var(--main-color-text);
         padding: 0 1rem;
         margin-bottom: 1rem;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        max-width: 329px;
         align-items: center;
         justify-content: flex-end;
         height: 78px;
         display: flex;
+        width: 100%;
+        max-width: 350px;
     }
 
     .result > span {
         font-size: 36px;
         font-weight: 600;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
     }
 </style>

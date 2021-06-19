@@ -1,10 +1,10 @@
 <template>
-    <div class="theme-selector">
+    <div class="themes">
         <span class="theme-selector-title">
             THEME
         </span>
-        <div class="theme-selector-selector">
-            <div class="theme-selector-selector-numbers">
+        <div class="theme-selector-">
+            <div class="theme-selector--numbers">
                 <span
                     v-for="theme in themes"
                     :key="theme"
@@ -12,14 +12,10 @@
                     {{ theme }}
                 </span>
             </div>
-            <span class="theme-selector-selector-toggle">
-                <i
-                    v-for="(theme, ix) in themes"
-                    :key="`${theme}-ball`"
-                    :class="{
-                        'active': theme == themeSelected
-                    }"
-                    :style="`left: ${(theme+ix)*6}px`" />
+            <span class="theme-selector--toggle">
+                <i :class="`${1 == themeSelected ? 'active' : ''}`" style="left: 7%" />
+                <i :class="`${2 == themeSelected ? 'active' : ''}`" style="left: 35%" />
+                <i :class="`${3 == themeSelected ? 'active' : ''}`" style="left: 70%" />
             </span>
         </div>
     </div>
@@ -45,45 +41,46 @@ changeBodyClass()
 </script>
 
 <style scoped>
-    .theme-selector {
+    .themes {
         display: flex;
         align-items: flex-end;
     }
     .theme-selector-title {
         color: var(--main-color-text);
         margin-right: 1rem;
-        font-size: 8px;
+        font-size: var(--font-size-theme-selector-title);
+        letter-spacing: 1px;
     }
 
-    .theme-selector-selector-numbers {
+    .theme-selector--numbers {
         color: var(--main-color-text);
         display: flex;
         justify-content: space-around;
         margin-bottom: 6px;
     }
 
-    .theme-selector-selector-numbers span {
+    .theme-selector--numbers span {
         cursor: pointer;
-        font-size: 7px;
+        font-size: var(--font-size-theme-selector-numbers);
     }
-    .theme-selector-selector-toggle {
+    .theme-selector--toggle {
         background-color: var(--bg-toggle);
         display: block;
-        width: 36px;
-        height: 14px;
+        width: var(--width-theme-toggle);
+        height: var(--height-theme-toggle);
         position: relative;
         padding: 0 4px;
-        border-radius: var(--border-radius);
+        border-radius: 36px;
     }
-    .theme-selector-selector-toggle i {
-        width: 9px;
-        height: 9px;
+    .theme-selector--toggle i {
+        width: var(--width-toggle-i-theme-selector);
+        height: var(--height-toggle-i-theme-selector);
         position: absolute;
-        top: 2px;
+        top: var(--top-toggle-i-theme-selector);
         display: inline-block;
     }
-    .theme-selector-selector-toggle i.active {
+    .theme-selector--toggle i.active {
         background-color: var(--bg-button-toggle);
-        border-radius: var(--border-radius);
+        border-radius: 100%;
     }
 </style>

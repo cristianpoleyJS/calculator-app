@@ -22,10 +22,16 @@
 </template>
 
 <script setup>
-import { ref, onUpdated } from 'vue'
-
 import Calculator from '../classes/Calculator'
 import Result from './Result.vue'
+import { ref } from 'vue'
+
+const DEL = 'del'
+const SUM = 'sum'
+const SUBTRACT = 'subtract'
+const COMMA = 'comma'
+const DIVIDE = 'divide'
+const MULTIPLY = 'multiply'
 
 const result = ref(0)
 const calculator = new Calculator(0, 0, 0)
@@ -33,30 +39,30 @@ const buttonsCalculator = [
     7, 8, 9,
     {
         text: 'DEL',
-        function: 'del'
+        function: DEL
     },
     4, 5, 6,
     {
         text: '+',
-        function: 'sum'
+        function: SUM
     },
     1, 2, 3,
     {
         text: '-',
-        function: 'subtract'
+        function: SUBTRACT
     },
     {
         text: '.',
-        function: 'comma'
+        function: COMMA
     },
     0,
     {
         text: '/',
-        function: 'divide'
+        function: DIVIDE
     },
     {
         text: 'x',
-        function: 'multiply'
+        function: MULTIPLY
     }]
 
 function handleButton (button) {
@@ -78,10 +84,10 @@ function handleButtonNumber (number) {
 }
 
 function handleButtonAction (action) {
-    if (action.function === 'del') {
+    if (action.function === this.DEL) {
         this.result = 0
         calculator.del()
-    } else if (action.function === 'comma') {
+    } else if (action.function === this.COMMA) {
         if (!calculator.getOperation() && !calculator.getFirstNumber().toString().includes('.')) {
             this.result = this.result.toString().concat('.')
             calculator.setFirstNumber(this.result)
@@ -102,10 +108,6 @@ function reset () {
     this.result = 0
     calculator.reset()
 }
-
-onUpdated(() => {
-    console.log(calculator)
-})
 </script>
 
 <style scoped>
@@ -127,12 +129,12 @@ onUpdated(() => {
         vertical-align: middle;
         border-radius: var(--border-radius);
         cursor: pointer;
-        padding: 0 18px;
-        height: 38px;
-        line-height: 44px;
+        min-width: 56px;
+        height: var(--height-calculator-main-buttons);
+        line-height: var(--line-height-calculator-main-buttons);
     }
     .calculator-main-buttons > button {
-        font-size: 20px;
+        font-size: var(--font-size-calculator-main-buttons);
     }
 
     .calculator-main-buttons > button.number {
@@ -149,7 +151,7 @@ onUpdated(() => {
         background-color: var(--bg-button-del);
         color: var(--buttons-del-color-text);
         box-shadow: 0px 3px 0px -0.1px var(--box-shadow-button-del);
-        font-size: 14px;
+        font-size: var(--font-size-button-del-reset);
         font-weight: 600;
     }
 
@@ -164,7 +166,7 @@ onUpdated(() => {
         background-color: var(--bg-button-reset);
         color: var(--buttons-reset-color-text);
         box-shadow: 0px 3px 0px -0.1px var(--box-shadow-button-reset);
-        font-size: 14px;
+        font-size: var(--font-size-button-del-reset);
         font-weight: 600;
     }
 
