@@ -1,33 +1,79 @@
 <template>
-    <Result :result="result"/>
+    <Number :number="number"/>
     <section class="calculator">
         <div class="calculator-main-buttons">
             <button
                 v-for="(button, ix) in buttonsCalculator"
                 :key="ix"
                 :class="{
-                    'number': button !== 'DEL' && typeof button === 'number',
-                    'action': button !== 'DEL' && typeof button === 'string',
-                    'del': button === 'DEL'
+                    'number': typeof button === 'number',
+                    'action': typeof button === 'object' && button.text !== 'DEL',
+                    'del': typeof button === 'object' && button.text === 'DEL'
                 }"
-                @click="select">
-                {{ button }}
+                @click="handleButton(button)">
+                {{ typeof button === 'object' ? button.text : button }}
             </button>
         </div>
         <div class="calculator-footer-buttons">
-            <button class="calculator-footer-buttons-reset">RESET</button>
-            <button class="calculator-footer-buttons-result">=</button>
+            <button class="calculator-footer-buttons-reset" @click="reset()">RESET</button>
+            <button class="calculator-footer-buttons-result" @click="calculateResult()">=</button>
         </div>
     </section>
 </template>
 
 <script setup>
-// import Calculafor from '../classes/Calculator'
-import Result from './Result.vue'
+import { ref } from 'vue'
 
-const result = '399,981'
+import Calculator from '../classes/Calculator'
+import Number from './Number.vue'
 
-const buttonsCalculator = [7, 8, 9, 'DEL', 4, 5, 6, '+', 1, 2, 3, '-', '.', 0, '/', 'x']
+const number = ref(0)
+const firstNumber = ref(0)
+const secondNumber = ref(0)
+const currentOperation = ref('')
+
+const buttonsCalculator = [
+    7, 8, 9,
+    {
+        text: 'DEL',
+        function: 'del'
+    },
+    4, 5, 6,
+    {
+        text: '+',
+        function: 'sum'
+    },
+    1, 2, 3,
+    {
+        text: '-',
+        function: 'subtract'
+    },
+    {
+        text: '.',
+        function: 'comma'
+    },
+    0,
+    {
+        text: '/',
+        function: 'divide'
+    },
+    {
+        text: 'x',
+        function: 'multiply'
+    }]
+const calculator = new Calculator()
+
+function handleButton (button) {
+    console.log(button)
+}
+
+function calculateResult () {
+    this.number = calculator[this.currentOperation](this.firstNumber, this.secondNumber)
+}
+
+function reset () {
+    calculator.reset()
+}
 </script>
 
 <style scoped>
@@ -49,9 +95,12 @@ const buttonsCalculator = [7, 8, 9, 'DEL', 4, 5, 6, '+', 1, 2, 3, '-', '.', 0, '
         vertical-align: middle;
         border-radius: var(--border-radius);
         cursor: pointer;
-        padding: 0 20px;
+        padding: 0 18px;
         height: 38px;
         line-height: 44px;
+    }
+    .calculator-main-buttons > button {
+        font-size: 20px;
     }
 
     .calculator-main-buttons > button.number {

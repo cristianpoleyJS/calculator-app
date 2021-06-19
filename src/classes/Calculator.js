@@ -1,34 +1,32 @@
 export default class Calculator {
 
     constructor (result) {
-        this.result = result || '0'
+        this.result = result
     }
 
-    get () {
-        return this.result
+    sum (firstNumber, secondNumber) {
+        return firstNumber + secondNumber
     }
 
-    sum (number) {
-        this.result += number
+    subtract (firstNumber, secondNumber) {
+        return firstNumber - secondNumber
     }
 
-    subtract (number) {
-        this.result -= number
+    multiply (firstNumber, secondNumber) {
+        return firstNumber * secondNumber
     }
 
-    multiply (number) {
-        this.result *= number
-    }
-
-    divide (number) {
-        this.result /= number
-    }
-
-    del () {
-        this.result = this.result.substring(0, this.result.length - 1)
+    divide (firstNumber, secondNumber) {
+        return firstNumber / secondNumber
     }
 
     reset () {
-        this.result = '0'
+        this.result = 0
+        this._resetNumbers()
+    }
+
+    _resetNumbers () {
+        this.firstNumber = 0
+        this.secondNumber = 0        
     }
 }
