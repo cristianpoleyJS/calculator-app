@@ -6,60 +6,175 @@
     --base-font-size: 18px;
     --base-font-weight: 700;
     --border-radius: 6px;
+
+    --font-size-app-layout-title: 20px;
+    --font-size-calculator-main-buttons: 20px;
+    --font-size-button-del-reset: 14px;
+    --font-size-theme-selector-title: 8px;
+    --font-size-theme-selector-numbers: 7px;
+    --height-calculator-main-buttons: 38px;
+    --line-height-calculator-main-buttons: 42px;
+    --width-theme-toggle: 42px;
+    --height-theme-toggle: 14px;
+    --width-toggle-i-theme-selector: 9px;
+    --height-toggle-i-theme-selector: 9px;
+    --top-toggle-i-theme-selector: 2px;
 }
 
-.theme-1 {
-    --main-bg: hsl(222, 26%, 31%);
-    --bg-result: hsl(224, 36%, 15%);
-    --bg-calculator: hsl(223, 31%, 20%);
-    --bg-toggle: hsl(223, 31%, 20%);
-
-    --main-color-text: #fefefe;
-    --buttons-numbers-color-text: hsl(221, 14%, 31%);
-    --buttons-actions-color-text: hsl(221, 14%, 31%);
-    --buttons-del-color-text: #e5edfa;
-    --buttons-reset-color-text: #e5edfa;
-    --buttons-result-color-text: #e5edfa;
-
-    --bg-button-toggle: hsl(6, 63%, 50%);
-    --bg-button-result: hsl(6, 63%, 50%);
-    --bg-button-reset: hsl(225, 21%, 49%);
-    --bg-button-del: hsl(225, 21%, 49%);
-    --bg-buttons-numbers: hsl(30, 25%, 89%);
-    --bg-buttons-actions: hsl(30, 25%, 89%);
-
-    --box-shadow-button-result: hsl(6, 70%, 34%);
-    --box-shadow-button-reset: hsl(224, 28%, 35%);
-    --box-shadow-button-del: hsl(224, 28%, 35%);
-    --box-shadow-buttons-numbers: hsl(28, 16%, 65%);
-    --box-shadow-buttons-actions: hsl(28, 16%, 65%);
+@media (max-width: 375px) {
+    :root {
+        --font-size-app-layout-title: 24px;
+        --font-size-calculator-main-buttons: 24px;
+        --font-size-button-del-reset: 18px;
+        --font-size-theme-selector-title: 11px;
+        --font-size-theme-selector-numbers: 10px;
+        --height-calculator-main-buttons: 54px;
+        --line-height-calculator-main-buttons: 58px;
+        --width-theme-toggle: 56px;
+        --height-theme-toggle: 20px;
+        --width-toggle-i-theme-selector: 14px;
+        --height-toggle-i-theme-selector: 14px;
+        --top-toggle-i-theme-selector: 3px;
+    }
 }
-.theme-2 {
-    --main-bg: hsl(0, 0%, 90%);
-    --bg-result: hsl(0, 0%, 93%);
-    --bg-calculator: hsl(0, 5%, 81%);
-    --bg-toggle: hsl(0, 5%, 81%);
 
-    --main-color-text: hsl(60, 10%, 19%);
-    --buttons-numbers-color-text: hsl(60, 10%, 19%);
-    --buttons-actions-color-text: hsl(60, 10%, 19%);
-    --buttons-del-color-text: #fefefe;
-    --buttons-reset-color-text: #fefefe;
-    --buttons-result-color-text: #fefefe;
-
-    --bg-button-toggle: hsl(25, 98%, 40%);
-    --bg-button-result: hsl(25, 98%, 40%);
-    --bg-button-reset: hsl(185, 42%, 37%);
-    --bg-button-del: hsl(185, 42%, 37%);
-    --bg-buttons-numbers: hsl(45, 7%, 89%);
-    --bg-buttons-actions: hsl(45, 7%, 89%);
-
-    --box-shadow-button-result: hsl(25, 99%, 27%);
-    --box-shadow-button-reset: hsl(185, 58%, 25%);
-    --box-shadow-button-del: hsl(185, 58%, 25%);
-    --box-shadow-buttons-numbers: hsl(35, 11%, 61%);
-    --box-shadow-buttons-actions: hsl(35, 11%, 61%);
+html,
+body {
+    padding: 0;
+    margin: 0;
 }
+
+* {
+    font-family: Spartan, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: var(--base-font-size);
+    font-weight: var(--base-font-weight);
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--main-bg);
+    height: 100vh;
+}
+
+button {
+    cursor: pointer;
+    outline: none;
+    border: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+
+    .theme-1 {
+        --main-bg: hsl(222, 26%, 31%);
+        --bg-result: hsl(224, 36%, 15%);
+        --bg-calculator: hsl(223, 31%, 20%);
+        --bg-toggle: hsl(223, 31%, 20%);
+
+        --main-color-text: #fefefe;
+        --buttons-numbers-color-text: hsl(221, 14%, 31%);
+        --buttons-actions-color-text: hsl(221, 14%, 31%);
+        --buttons-del-color-text: #e5edfa;
+        --buttons-reset-color-text: #e5edfa;
+        --buttons-result-color-text: #e5edfa;
+
+        --bg-button-toggle: hsl(6, 63%, 50%);
+        --bg-button-result: hsl(6, 63%, 50%);
+        --bg-button-reset: hsl(225, 21%, 49%);
+        --bg-button-del: hsl(225, 21%, 49%);
+        --bg-buttons-numbers: hsl(30, 25%, 89%);
+        --bg-buttons-actions: hsl(30, 25%, 89%);
+
+        --box-shadow-button-result: hsl(6, 70%, 34%);
+        --box-shadow-button-reset: hsl(224, 28%, 35%);
+        --box-shadow-button-del: hsl(224, 28%, 35%);
+        --box-shadow-buttons-numbers: hsl(28, 16%, 65%);
+        --box-shadow-buttons-actions: hsl(28, 16%, 65%);
+    }
+
+    .theme-2 {
+        --main-bg: hsl(0, 0%, 90%);
+        --bg-result: hsl(0, 0%, 93%);
+        --bg-calculator: hsl(0, 5%, 81%);
+        --bg-toggle: hsl(0, 5%, 81%);
+
+        --main-color-text: hsl(60, 10%, 19%);
+        --buttons-numbers-color-text: hsl(60, 10%, 19%);
+        --buttons-actions-color-text: hsl(60, 10%, 19%);
+        --buttons-del-color-text: #fefefe;
+        --buttons-reset-color-text: #fefefe;
+        --buttons-result-color-text: #fefefe;
+
+        --bg-button-toggle: hsl(25, 98%, 40%);
+        --bg-button-result: hsl(25, 98%, 40%);
+        --bg-button-reset: hsl(185, 42%, 37%);
+        --bg-button-del: hsl(185, 42%, 37%);
+        --bg-buttons-numbers: hsl(45, 7%, 89%);
+        --bg-buttons-actions: hsl(45, 7%, 89%);
+
+        --box-shadow-button-result: hsl(25, 99%, 27%);
+        --box-shadow-button-reset: hsl(185, 58%, 25%);
+        --box-shadow-button-del: hsl(185, 58%, 25%);
+        --box-shadow-buttons-numbers: hsl(35, 11%, 61%);
+        --box-shadow-buttons-actions: hsl(35, 11%, 61%);
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    .theme-2 {
+        --main-bg: hsl(222, 26%, 31%);
+        --bg-result: hsl(224, 36%, 15%);
+        --bg-calculator: hsl(223, 31%, 20%);
+        --bg-toggle: hsl(223, 31%, 20%);
+
+        --main-color-text: #fefefe;
+        --buttons-numbers-color-text: hsl(221, 14%, 31%);
+        --buttons-actions-color-text: hsl(221, 14%, 31%);
+        --buttons-del-color-text: #e5edfa;
+        --buttons-reset-color-text: #e5edfa;
+        --buttons-result-color-text: #e5edfa;
+
+        --bg-button-toggle: hsl(6, 63%, 50%);
+        --bg-button-result: hsl(6, 63%, 50%);
+        --bg-button-reset: hsl(225, 21%, 49%);
+        --bg-button-del: hsl(225, 21%, 49%);
+        --bg-buttons-numbers: hsl(30, 25%, 89%);
+        --bg-buttons-actions: hsl(30, 25%, 89%);
+
+        --box-shadow-button-result: hsl(6, 70%, 34%);
+        --box-shadow-button-reset: hsl(224, 28%, 35%);
+        --box-shadow-button-del: hsl(224, 28%, 35%);
+        --box-shadow-buttons-numbers: hsl(28, 16%, 65%);
+        --box-shadow-buttons-actions: hsl(28, 16%, 65%);
+    }
+
+    .theme-1 {
+        --main-bg: hsl(0, 0%, 90%);
+        --bg-result: hsl(0, 0%, 93%);
+        --bg-calculator: hsl(0, 5%, 81%);
+        --bg-toggle: hsl(0, 5%, 81%);
+
+        --main-color-text: hsl(60, 10%, 19%);
+        --buttons-numbers-color-text: hsl(60, 10%, 19%);
+        --buttons-actions-color-text: hsl(60, 10%, 19%);
+        --buttons-del-color-text: #fefefe;
+        --buttons-reset-color-text: #fefefe;
+        --buttons-result-color-text: #fefefe;
+
+        --bg-button-toggle: hsl(25, 98%, 40%);
+        --bg-button-result: hsl(25, 98%, 40%);
+        --bg-button-reset: hsl(185, 42%, 37%);
+        --bg-button-del: hsl(185, 42%, 37%);
+        --bg-buttons-numbers: hsl(45, 7%, 89%);
+        --bg-buttons-actions: hsl(45, 7%, 89%);
+
+        --box-shadow-button-result: hsl(25, 99%, 27%);
+        --box-shadow-button-reset: hsl(185, 58%, 25%);
+        --box-shadow-button-del: hsl(185, 58%, 25%);
+        --box-shadow-buttons-numbers: hsl(35, 11%, 61%);
+        --box-shadow-buttons-actions: hsl(35, 11%, 61%);
+    }
+}
+
 .theme-3 {
     --main-bg: hsl(268, 75%, 9%);
     --bg-result: hsl(268, 71%, 12%);
@@ -80,33 +195,9 @@
     --bg-buttons-numbers: hsl(268, 47%, 21%);
     --bg-buttons-actions: hsl(268, 47%, 21%);
 
-    --box-shadow-button-result: ;
+    --box-shadow-button-result: hsl(177, 92%, 70%);
     --box-shadow-button-reset: hsl(285, 91%, 52%);
     --box-shadow-button-del: hsl(285, 91%, 52%);
     --box-shadow-buttons-numbers: hsl(290, 70%, 36%);
     --box-shadow-buttons-actions: hsl(290, 70%, 36%);
-}
-
-html,
-body {
-    padding: 0;
-    margin: 0;
-}
-
-* {
-    font-family: Spartan, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: var(--base-font-size);
-    font-weight: var(--base-font-weight);
-    box-sizing: content-box;
-}
-
-body {
-    background-color: var(--main-bg);
-    height: 100vh;
-}
-
-button {
-    cursor: pointer;
-    border: 0;
-    outline: none;
 }

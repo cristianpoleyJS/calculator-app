@@ -1,5 +1,5 @@
 <template>
-    <Number :number="number"/>
+    <Result :result="result"/>
     <section class="calculator">
         <div class="calculator-main-buttons">
             <button
@@ -22,56 +22,90 @@
 </template>
 
 <script setup>
+import Calculator from '../classes/Calculator'
+import Result from './Result.vue'
 import { ref } from 'vue'
 
-import Calculator from '../classes/Calculator'
-import Number from './Number.vue'
+const DEL = 'del'
+const SUM = 'sum'
+const SUBTRACT = 'subtract'
+const COMMA = 'comma'
+const DIVIDE = 'divide'
+const MULTIPLY = 'multiply'
 
-const number = ref(0)
-const firstNumber = ref(0)
-const secondNumber = ref(0)
-const currentOperation = ref('')
-
+const result = ref(0)
+const calculator = new Calculator(0, 0, 0)
 const buttonsCalculator = [
     7, 8, 9,
     {
         text: 'DEL',
-        function: 'del'
+        function: DEL
     },
     4, 5, 6,
     {
         text: '+',
-        function: 'sum'
+        function: SUM
     },
     1, 2, 3,
     {
         text: '-',
-        function: 'subtract'
+        function: SUBTRACT
     },
     {
         text: '.',
-        function: 'comma'
+        function: COMMA
     },
     0,
     {
         text: '/',
-        function: 'divide'
+        function: DIVIDE
     },
     {
         text: 'x',
-        function: 'multiply'
+        function: MULTIPLY
     }]
-const calculator = new Calculator()
 
 function handleButton (button) {
-    console.log(button)
+    if (typeof button === 'number') {
+        this.handleButtonNumber(button)
+    } else {
+        this.handleButtonAction(button)
+    }
+}
+
+function handleButtonNumber (number) {
+    if (!calculator.getOperation()) {
+        this.result = calculator.getFirstNumber().toString().concat(number.toString()) * 1
+        calculator.setFirstNumber(this.result)
+    } else {
+        this.result = calculator.getSecondNumber().toString().concat(number.toString()) * 1
+        calculator.setSecondNumber(this.result)
+    }
+}
+
+function handleButtonAction (action) {
+    if (action.function === this.DEL) {
+        this.result = 0
+        calculator.del()
+    } else if (action.function === this.COMMA) {
+        if (!calculator.getOperation() && !calculator.getFirstNumber().toString().includes('.')) {
+            this.result = this.result.toString().concat('.')
+            calculator.setFirstNumber(this.result)
+        } else if (calculator.getOperation() && !calculator.getSecondNumber().toString().includes('.')) {
+            this.result = this.result.toString().concat('.')
+            calculator.setSecondNumber(this.result)
+        }
+    } else {
+        calculator.setOperation(action.function)
+    }
 }
 
 function calculateResult () {
-    this.number = calculator[this.currentOperation](this.firstNumber, this.secondNumber)
+    this.result = calculator.getResult()
 }
 
 function reset () {
+    this.result = 0
     calculator.reset()
 }
 </script>
@@ -95,12 +129,12 @@ function reset () {
         vertical-align: middle;
         border-radius: var(--border-radius);
         cursor: pointer;
-        padding: 0 18px;
-        height: 38px;
-        line-height: 44px;
+        min-width: 56px;
+        height: var(--height-calculator-main-buttons);
+        line-height: var(--line-height-calculator-main-buttons);
     }
     .calculator-main-buttons > button {
-        font-size: 20px;
+        font-size: var(--font-size-calculator-main-buttons);
     }
 
     .calculator-main-buttons > button.number {
@@ -117,7 +151,7 @@ function reset () {
         background-color: var(--bg-button-del);
         color: var(--buttons-del-color-text);
         box-shadow: 0px 3px 0px -0.1px var(--box-shadow-button-del);
-        font-size: 14px;
+        font-size: var(--font-size-button-del-reset);
         font-weight: 600;
     }
 
@@ -132,7 +166,7 @@ function reset () {
         background-color: var(--bg-button-reset);
         color: var(--buttons-reset-color-text);
         box-shadow: 0px 3px 0px -0.1px var(--box-shadow-button-reset);
-        font-size: 14px;
+        font-size: var(--font-size-button-del-reset);
         font-weight: 600;
     }
 
