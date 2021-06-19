@@ -1,32 +1,72 @@
 export default class Calculator {
 
-    constructor (result) {
+    constructor (firstNumber, secondNumber, result) {
+        this.firstNumber = firstNumber
+        this.secondNumber = secondNumber
         this.result = result
+        this.operation = ''
     }
 
-    sum (firstNumber, secondNumber) {
-        return firstNumber + secondNumber
+    getFirstNumber () {
+        return this.firstNumber
     }
 
-    subtract (firstNumber, secondNumber) {
-        return firstNumber - secondNumber
+    getSecondNumber () {
+        return this.secondNumber
     }
 
-    multiply (firstNumber, secondNumber) {
-        return firstNumber * secondNumber
+    getOperation () {
+        return this.operation
     }
 
-    divide (firstNumber, secondNumber) {
-        return firstNumber / secondNumber
+    getResult () {
+        if (this.operation) {
+            const result = this[this.operation]()
+            this.reset()
+            this.setFirstNumber(result)
+            return result
+        }
+        return this.firstNumber
+    }
+
+    setFirstNumber (number) {
+        this.firstNumber = number
+    }
+
+    setSecondNumber (number) {
+        this.secondNumber = number
+    }
+
+    setOperation (operation) {
+        this.operation = operation
+    }
+
+    sum () {
+        return this.firstNumber + this.secondNumber
+    }
+
+    subtract () {
+        return this.firstNumber - this.secondNumber
+    }
+
+    multiply () {
+        return this.firstNumber * this.secondNumber
+    }
+
+    divide () {
+        return this.firstNumber / this.secondNumber
+    }
+
+    del () {
+        this.secondNumber > 0
+        ? this.setSecondNumber(0)
+        : this.setFirstNumber(0)
     }
 
     reset () {
         this.result = 0
-        this._resetNumbers()
-    }
-
-    _resetNumbers () {
-        this.firstNumber = 0
-        this.secondNumber = 0        
+        this.setSecondNumber(0)
+        this.setFirstNumber(0)
+        this.setOperation('')
     }
 }

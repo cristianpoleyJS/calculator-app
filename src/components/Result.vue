@@ -1,6 +1,6 @@
 <template>
-    <div class="number">
-        <span>{{ Number(number).toLocaleString() }}</span>
+    <div class="result">
+        <span>{{ Number(result).toLocaleString() }}</span>
     </div>
 </template>
 
@@ -8,24 +8,27 @@
 import { defineProps } from 'vue'
 
 defineProps({
-  number: Number
+  result: Number || String
 })
 </script>
 
 <style scoped>
-    .number {
+    .result {
         background-color: var(--bg-result);
         border-radius: var(--border-radius);
         color: var(--main-color-text);
-        padding: 1rem;
-        text-align: right;
+        padding: 0 1rem;
         margin-bottom: 1rem;
         text-overflow: ellipsis;
         overflow: hidden;
         max-width: 329px;
+        align-items: center;
+        justify-content: flex-end;
+        height: 78px;
+        display: flex;
     }
 
-    .number > span {
+    .result > span {
         font-size: 36px;
         font-weight: 600;
     }

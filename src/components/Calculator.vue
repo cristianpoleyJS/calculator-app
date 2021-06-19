@@ -1,5 +1,5 @@
 <template>
-    <Number :number="number"/>
+    <Result :result="result"/>
     <section class="calculator">
         <div class="calculator-main-buttons">
             <button
@@ -22,16 +22,13 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onUpdated } from 'vue'
 
 import Calculator from '../classes/Calculator'
-import Number from './Number.vue'
+import Result from './Result.vue'
 
-const number = ref(0)
-const firstNumber = ref(0)
-const secondNumber = ref(0)
-const currentOperation = ref('')
-
+const result = ref(0)
+const calculator = new Calculator(0, 0, 0)
 const buttonsCalculator = [
     7, 8, 9,
     {
@@ -61,19 +58,54 @@ const buttonsCalculator = [
         text: 'x',
         function: 'multiply'
     }]
-const calculator = new Calculator()
 
 function handleButton (button) {
-    console.log(button)
+    if (typeof button === 'number') {
+        this.handleButtonNumber(button)
+    } else {
+        this.handleButtonAction(button)
+    }
+}
+
+function handleButtonNumber (number) {
+    if (!calculator.getOperation()) {
+        this.result = calculator.getFirstNumber().toString().concat(number.toString()) * 1
+        calculator.setFirstNumber(this.result)
+    } else {
+        this.result = calculator.getSecondNumber().toString().concat(number.toString()) * 1
+        calculator.setSecondNumber(this.result)
+    }
+}
+
+function handleButtonAction (action) {
+    if (action.function === 'del') {
+        this.result = 0
+        calculator.del()
+    } else if (action.function === 'comma') {
+        if (!calculator.getOperation() && !calculator.getFirstNumber().toString().includes('.')) {
+            this.result = this.result.toString().concat('.')
+            calculator.setFirstNumber(this.result)
+        } else if (calculator.getOperation() && !calculator.getSecondNumber().toString().includes('.')) {
+            this.result = this.result.toString().concat('.')
+            calculator.setSecondNumber(this.result)
+        }
+    } else {
+        calculator.setOperation(action.function)
+    }
 }
 
 function calculateResult () {
-    this.number = calculator[this.currentOperation](this.firstNumber, this.secondNumber)
+    this.result = calculator.getResult()
 }
 
 function reset () {
+    this.result = 0
     calculator.reset()
 }
+
+onUpdated(() => {
+    console.log(calculator)
+})
 </script>
 
 <style scoped>
