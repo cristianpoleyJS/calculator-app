@@ -1,5 +1,7 @@
 # Frontend Mentor - Calculator app solution
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d7372b38-1e88-441c-aa3e-dfa7efea52b1/deploy-status)](https://app.netlify.com/sites/calculator-frontendmentor/deploys)
+
 This is a solution to the [Calculator app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/calculator-app-9lteq5N29). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
 
 ## Table of contents
