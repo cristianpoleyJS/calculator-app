@@ -1,66 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@500&display=swap');
+
 :root {
-    --base-font: 16px;
+    --base-font-size: 18px;
+    --base-font-weight: 700;
+    --border-radius: 6px;
 }
+
 .theme-1 {
-    --main-bg: #3b4664;
-    --result-bg: #181e32;
-    --bg-calculator: #242d44;
-    --bg-toggle: #242d44;
+    --main-bg: hsl(222, 26%, 31%);
+    --bg-result: hsl(224, 36%, 15%);
+    --bg-calculator: hsl(223, 31%, 20%);
+    --bg-toggle: hsl(223, 31%, 20%);
 
     --main-color-text: #fefefe;
-    --buttons-numbers-color-text: #474b5b;
-    --buttons-actions-color-text: #474b5b;
+    --buttons-numbers-color-text: hsl(221, 14%, 31%);
+    --buttons-actions-color-text: hsl(221, 14%, 31%);
     --buttons-del-color-text: #e5edfa;
-    --buttons-reset-color-text: ##e5edfa;
+    --buttons-reset-color-text: #e5edfa;
+    --buttons-result-color-text: #e5edfa;
 
-    --bg-button-toggle: #d13f31;
-    --bg-button-result: #d13f31;
-    --bg-button-reset: #64729a;
-    --bg-button-del: #64729a;
-    --bg-buttons-numbers: #eae3db;
-    --bg-buttons-actions: #eae3db;
+    --bg-button-toggle: hsl(6, 63%, 50%);
+    --bg-button-result: hsl(6, 63%, 50%);
+    --bg-button-reset: hsl(225, 21%, 49%);
+    --bg-button-del: hsl(225, 21%, 49%);
+    --bg-buttons-numbers: hsl(30, 25%, 89%);
+    --bg-buttons-actions: hsl(30, 25%, 89%);
+
+    --box-shadow-button-result: hsl(6, 70%, 34%);
+    --box-shadow-button-reset: hsl(224, 28%, 35%);
+    --box-shadow-button-del: hsl(224, 28%, 35%);
+    --box-shadow-buttons-numbers: hsl(28, 16%, 65%);
+    --box-shadow-buttons-actions: hsl(28, 16%, 65%);
 }
 .theme-2 {
-    --main-bg: #e6e6e6;
-    --result-bg: #eeeeee;
-    --bg-calculator: #d3cdcd;
-    --bg-toggle: #d3cdcd;
+    --main-bg: hsl(0, 0%, 90%);
+    --bg-result: hsl(0, 0%, 93%);
+    --bg-calculator: hsl(0, 5%, 81%);
+    --bg-toggle: hsl(0, 5%, 81%);
 
-    --main-color-text: #36352c;
-    --buttons-numbers-color-text: #36352c;
-    --buttons-actions-color-text: #36352c;
-    --buttons-del-color-text: #fffbfa;
-    --buttons-reset-color-text: #fffbfa;
+    --main-color-text: hsl(60, 10%, 19%);
+    --buttons-numbers-color-text: hsl(60, 10%, 19%);
+    --buttons-actions-color-text: hsl(60, 10%, 19%);
+    --buttons-del-color-text: #fefefe;
+    --buttons-reset-color-text: #fefefe;
+    --buttons-result-color-text: #fefefe;
 
-    --bg-button-toggle: #c15906;
-    --bg-button-result: #c15906;
-    --bg-button-reset: #388187;
-    --bg-button-del: #388187;
-    --bg-buttons-numbers: #e5e4e0;
-    --bg-buttons-actions: #e5e4e0;
+    --bg-button-toggle: hsl(25, 98%, 40%);
+    --bg-button-result: hsl(25, 98%, 40%);
+    --bg-button-reset: hsl(185, 42%, 37%);
+    --bg-button-del: hsl(185, 42%, 37%);
+    --bg-buttons-numbers: hsl(45, 7%, 89%);
+    --bg-buttons-actions: hsl(45, 7%, 89%);
+
+    --box-shadow-button-result: hsl(25, 99%, 27%);
+    --box-shadow-button-reset: hsl(185, 58%, 25%);
+    --box-shadow-button-del: hsl(185, 58%, 25%);
+    --box-shadow-buttons-numbers: hsl(35, 11%, 61%);
+    --box-shadow-buttons-actions: hsl(35, 11%, 61%);
 }
 .theme-3 {
-    --main-bg: #16062a;
-    --result-bg: #1e0836;
-    --bg-calculator: #1e0837;
-    --bg-toggle: #1e0836;
+    --main-bg: hsl(268, 75%, 9%);
+    --bg-result: hsl(268, 71%, 12%);
+    --bg-calculator: hsl(268, 71%, 12%);
+    --bg-toggle: hsl(268, 71%, 12%);
 
-    --main-color-text: #fbe73c;
-    --buttons-numbers-color-text: #fbe73c;
-    --buttons-actions-color-text: #fbe73c;
+    --main-color-text: hsl(52, 100%, 62%);
+    --buttons-numbers-color-text: hsl(52, 100%, 62%);
+    --buttons-actions-color-text: hsl(52, 100%, 62%);
     --buttons-del-color-text: #fef1f3;
     --buttons-reset-color-text: #fef1f3;
+    --buttons-result-color-text: hsl(198, 20%, 13%);
 
-    --bg-button-toggle: #00decf;
-    --bg-button-result: #00decf;
-    --bg-button-reset: #56147c;
-    --bg-button-del: #56147c;
-    --bg-buttons-numbers: #331b4d;
-    --bg-buttons-actions: #331b4d;
+    --bg-button-toggle: hsl(176, 100%, 44%);
+    --bg-button-result: hsl(176, 100%, 44%);
+    --bg-button-reset: hsl(281, 89%, 26%);
+    --bg-button-del: hsl(281, 89%, 26%);
+    --bg-buttons-numbers: hsl(268, 47%, 21%);
+    --bg-buttons-actions: hsl(268, 47%, 21%);
+
+    --box-shadow-button-result: ;
+    --box-shadow-button-reset: hsl(285, 91%, 52%);
+    --box-shadow-button-del: hsl(285, 91%, 52%);
+    --box-shadow-buttons-numbers: hsl(290, 70%, 36%);
+    --box-shadow-buttons-actions: hsl(290, 70%, 36%);
 }
 
 html,
 body {
     padding: 0;
     margin: 0;
+}
+
+* {
+    font-family: Spartan, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: var(--base-font-size);
+    font-weight: var(--base-font-weight);
+}
+
+body {
+    background-color: var(--main-bg);
+    height: 100vh;
+}
+
+button {
+    cursor: pointer;
+    border: 0;
+    outline: none;
 }
