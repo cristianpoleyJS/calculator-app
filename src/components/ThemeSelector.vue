@@ -21,23 +21,35 @@
     </div>
 </template>
 
-<script setup>
+<script>
 import { ref } from 'vue'
 
-function changeBodyClass () {
-    document.body.className = `theme-${themeSelected.value}`
+export default {
+    setup () {
+        const themeSelected = ref(localStorage.getItem('theme') || 1)
+        const themes = [1, 2, 3]
+
+        return {
+            themeSelected,
+            themes
+        }
+    },
+    mounted () {
+        this.changeBodyClass()
+    },
+    methods: {
+
+        changeBodyClass () {
+            document.body.className = `theme-${this.themeSelected}`
+        },
+        
+        changeTheme (theme) {
+            this.themeSelected = theme
+            localStorage.setItem('theme', this.themeSelected)
+            this.changeBodyClass()
+        }
+    }
 }
-
-function changeTheme (theme) {
-    this.themeSelected = theme
-    localStorage.setItem('theme', this.themeSelected)
-    this.changeBodyClass()
-}
-
-const themeSelected = ref(localStorage.getItem('theme') || 1)
-const themes = [1, 2, 3]
-changeBodyClass()
-
 </script>
 
 <style scoped>

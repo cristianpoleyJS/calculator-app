@@ -21,7 +21,7 @@
     </section>
 </template>
 
-<script setup>
+<script>
 import Calculator from '../classes/Calculator'
 import Result from './Result.vue'
 import { ref } from 'vue'
@@ -33,81 +33,94 @@ const COMMA = 'comma'
 const DIVIDE = 'divide'
 const MULTIPLY = 'multiply'
 
-const result = ref(0)
-const calculator = new Calculator(0, 0, 0)
-const buttonsCalculator = [
-    7, 8, 9,
-    {
-        text: 'DEL',
-        function: DEL
-    },
-    4, 5, 6,
-    {
-        text: '+',
-        function: SUM
-    },
-    1, 2, 3,
-    {
-        text: '-',
-        function: SUBTRACT
-    },
-    {
-        text: '.',
-        function: COMMA
-    },
-    0,
-    {
-        text: '/',
-        function: DIVIDE
-    },
-    {
-        text: 'x',
-        function: MULTIPLY
-    }]
-
-function handleButton (button) {
-    if (typeof button === 'number') {
-        this.handleButtonNumber(button)
-    } else {
-        this.handleButtonAction(button)
-    }
-}
-
-function handleButtonNumber (number) {
-    if (!calculator.getOperation()) {
-        this.result = calculator.getFirstNumber().toString().concat(number.toString()) * 1
-        calculator.setFirstNumber(this.result)
-    } else {
-        this.result = calculator.getSecondNumber().toString().concat(number.toString()) * 1
-        calculator.setSecondNumber(this.result)
-    }
-}
-
-function handleButtonAction (action) {
-    if (action.function === this.DEL) {
-        this.result = 0
-        calculator.del()
-    } else if (action.function === this.COMMA) {
-        if (!calculator.getOperation() && !calculator.getFirstNumber().toString().includes('.')) {
-            this.result = this.result.toString().concat('.')
-            calculator.setFirstNumber(this.result)
-        } else if (calculator.getOperation() && !calculator.getSecondNumber().toString().includes('.')) {
-            this.result = this.result.toString().concat('.')
-            calculator.setSecondNumber(this.result)
+export default {
+    setup () {
+        const result = ref(0)
+        const calculator = new Calculator(0, 0, 0)
+        const buttonsCalculator = [
+            7, 8, 9,
+            {
+                text: 'DEL',
+                function: DEL
+            },
+            4, 5, 6,
+            {
+                text: '+',
+                function: SUM
+            },
+            1, 2, 3,
+            {
+                text: '-',
+                function: SUBTRACT
+            },
+            {
+                text: '.',
+                function: COMMA
+            },
+            0,
+            {
+                text: '/',
+                function: DIVIDE
+            },
+            {
+                text: 'x',
+                function: MULTIPLY
+        }]
+        return {
+            result,
+            calculator,
+            buttonsCalculator
         }
-    } else {
-        calculator.setOperation(action.function)
+    },
+    components: {
+        Result
+    },
+    methods: {
+
+        handleButton (button) {
+            typeof button === 'number'
+                ? this.handleButtonNumber(button)
+                : this.handleButtonAction(button)
+        },
+
+        handleButtonNumber (number) {
+            if (!this.calculator.getOperation()) {
+                this.result = this.calculator.getFirstNumber().toString().concat(number.toString()) * 1
+                this.calculator.setFirstNumber(this.result)
+            } else {
+                this.result = this.calculator.getSecondNumber().toString().concat(number.toString()) * 1
+                this.calculator.setSecondNumber(this.result)
+            }
+        },
+
+        handleButtonAction (action) {
+            if (action.function === DEL) {
+                this.result = 0
+                this.calculator.del()
+            } else if (action.function === COMMA) {
+                if (!this.calculator.getOperation() && !this.calculator.getFirstNumber().toString().includes('.')) {
+                    this.result = this.result.toString().concat('.')
+                    this.calculator.setFirstNumber(this.result)
+                } else if (this.calculator.getOperation() && !this.calculator.getSecondNumber().toString().includes('.')) {
+                    this.result = this.result.toString().concat('.')
+                    this.calculator.setSecondNumber(this.result)
+                }
+            } else {
+                this.calculator.setOperation(action.function)
+            }
+        },
+
+        calculateResult () {
+            this.result = this.calculator.getResult()
+        },
+
+        reset () {
+            this.result = 0
+            this.calculator.reset()
+        }
     }
 }
 
-function calculateResult () {
-    this.result = calculator.getResult()
-}
-
-function reset () {
-    this.result = 0
-    calculator.reset()
-}
 </script>
 
 <style scoped>
